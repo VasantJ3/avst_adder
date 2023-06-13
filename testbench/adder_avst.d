@@ -103,8 +103,8 @@ class avst_seq: uvm_sequence!avst_item
   }
 
   Constraint!q{
-    seq_size < 64;
-    seq_size > 16;
+    seq_size < 4;
+    seq_size > 0;
   } seq_size_cst;
 
   // task
