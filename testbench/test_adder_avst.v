@@ -8,7 +8,7 @@ module test_adder;
    reg reset;
    reg [7:0] data_in;
    reg 	     end_in;
-   reg 	     valid_in;
+   reg 	     valid_in; 
    reg 	     ready_out;
 
    // Outputs
@@ -49,19 +49,18 @@ module test_adder;
 		    data_in <= tdata;
 		    end_in <= 0;
 		    valid_in <= 1;
+          retval = $avst_item_done(0);
 		 end
 		 else begin
 		    data_in <= tdata;
 		    end_in <= 1;
 		    valid_in <= 1;
-		 end
-		 @(negedge clk);
-		 #5;
-		 end_in <= 0;
-		 valid_in <= 0;
-		 @(posedge clk);
-		 #5;
-		 retval = $avst_item_done(0);
+		    @(posedge clk);
+          #5
+          	 end_in <= 0;
+	   	 valid_in <= 0; 
+		    retval = $avst_item_done(0);
+       end
 	      end // case: 0
 	      default:  ; // $finish;
 	    endcase // case ($avl_try_next_item(tdata, tend))
